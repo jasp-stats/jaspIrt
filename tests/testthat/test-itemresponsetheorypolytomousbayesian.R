@@ -1,5 +1,7 @@
 context("[IRT] Bayesian Polytomous Item Response Theory")
 
+options("jaspRoundToPrecision" = function(x) signif(round(x, digits = 2), digits = 2))
+
 # Test 1, file: nominal.csv, model: partial credit #############################
 
 options <- initIRTOptions("itemResponseTheoryPolytomousBayesian")

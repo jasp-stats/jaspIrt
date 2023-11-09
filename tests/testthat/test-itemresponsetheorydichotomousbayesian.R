@@ -1,5 +1,7 @@
 context("[IRT] Bayesian Dichotomous Item Response Theory")
 
+options("jaspRoundToPrecision" = function(x) signif(round(x, digits = 2), digits = 2))
+
 # Consistency test 1, file: binary.csv, model: Rasch ###########################
 
 options <- initIRTOptions("itemResponseTheoryDichotomousBayesian")
