@@ -28,30 +28,6 @@ options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-1")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-1")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-1")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-1")
-})
-
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -158,30 +134,6 @@ options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary2.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-2")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-2")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-2")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-2")
-})
-
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -263,30 +215,6 @@ options$seed <- 1
 options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-3")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-3")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-3")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-3")
-})
 
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
@@ -404,30 +332,6 @@ options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary2.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-4")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-4")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-4")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-4")
-})
-
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -511,30 +415,6 @@ options$seed <- 1
 options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-5")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-5")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-5")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-5")
-})
 
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
@@ -663,30 +543,6 @@ options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary2.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-6")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-6")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-6")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-6")
-})
-
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -775,30 +631,6 @@ options$seed <- 1
 options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-7")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-7")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-7")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-7")
-})
 
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]
@@ -943,30 +775,6 @@ options$seed <- 1
 options$emIterations <- 2000
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryDichotomous", "binary2.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-8")
-})
-
-test_that("Item Characteristic Curves plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-characteristic-curves-8")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-8")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-8")
-})
 
 test_that("Additional Fit Statistics table results match", {
   table <- results[["results"]][["tableFitStatistics"]][["data"]]

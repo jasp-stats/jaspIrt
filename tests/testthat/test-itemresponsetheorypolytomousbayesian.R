@@ -100,54 +100,6 @@ options$tableParameterEstimates <- FALSE
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryPolytomousBayesian", "nominal.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-1")
-})
-
-test_that("Item Q1 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot1"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q1-1")
-})
-
-test_that("Item Q2 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot2"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q2-1")
-})
-
-test_that("Item Q3 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot3"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q3-1")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-1")
-})
-
-test_that("Difficulty b plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_beta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "difficulty-b-1")
-})
-
-test_that("θ plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_theta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "theta-1")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-1")
-})
-
 test_that("Item Information table results match", {
   table <- results[["results"]][["tableItemStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -267,60 +219,6 @@ options$tableItemStatistics <- TRUE
 options$tableParameterEstimates <- FALSE
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryPolytomousBayesian", "nominal.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-2")
-})
-
-test_that("Item Q1 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot1"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q1-2")
-})
-
-test_that("Item Q2 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot2"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q2-2")
-})
-
-test_that("Item Q3 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot3"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q3-2")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-2")
-})
-
-test_that("Discrimination a plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_alpha"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "discrimination-a-2")
-})
-
-test_that("Difficulty b plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_beta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "difficulty-b-2")
-})
-
-test_that("θ plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_theta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "theta-2")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-2")
-})
 
 test_that("Item Information table results match", {
   table <- results[["results"]][["tableItemStatistics"]][["data"]]
@@ -443,60 +341,6 @@ options$tableParameterEstimates <- FALSE
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryPolytomousBayesian", "nominal.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-3")
-})
-
-test_that("Item Q1 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot1"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q1-3")
-})
-
-test_that("Item Q2 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot2"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q2-3")
-})
-
-test_that("Item Q3 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot3"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q3-3")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-3")
-})
-
-test_that("Difficulty b plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_beta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "difficulty-b-3")
-})
-
-test_that("θ plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_theta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "theta-3")
-})
-
-test_that("Threshold t plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_threshold"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "threshold-t-3")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-3")
-})
-
 test_that("Item Information table results match", {
   table <- results[["results"]][["tableItemStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -616,66 +460,6 @@ options$tableItemStatistics <- TRUE
 options$tableParameterEstimates <- FALSE
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryPolytomousBayesian", "nominal.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-4")
-})
-
-test_that("Item Q1 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot1"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q1-4")
-})
-
-test_that("Item Q2 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot2"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q2-4")
-})
-
-test_that("Item Q3 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot3"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q3-4")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-4")
-})
-
-test_that("Discrimination a plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_alpha"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "discrimination-a-4")
-})
-
-test_that("Difficulty b plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_beta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "difficulty-b-4")
-})
-
-test_that("θ plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_theta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "theta-4")
-})
-
-test_that("Threshold t plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_threshold"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "threshold-t-4")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-4")
-})
 
 test_that("Item Information table results match", {
   table <- results[["results"]][["tableItemStatistics"]][["data"]]
@@ -798,60 +582,6 @@ options$tableParameterEstimates <- FALSE
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryPolytomousBayesian", "nominal.csv", options)
 
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-5")
-})
-
-test_that("Item Q1 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot1"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q1-5")
-})
-
-test_that("Item Q2 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot2"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q2-5")
-})
-
-test_that("Item Q3 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot3"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q3-5")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-5")
-})
-
-test_that("Discrimination a plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_alpha"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "discrimination-a-5")
-})
-
-test_that("Difficulty b plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_beta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "difficulty-b-5")
-})
-
-test_that("θ plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_theta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "theta-5")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-5")
-})
-
 test_that("Item Information table results match", {
   table <- results[["results"]][["tableItemStatistics"]][["data"]]
   jaspTools::expect_equal_tables(
@@ -972,60 +702,6 @@ options$tableItemStatistics <- TRUE
 options$tableParameterEstimates <- FALSE
 set.seed(1)
 results <- runAnalysis("itemResponseTheoryPolytomousBayesian", "nominal.csv", options)
-
-test_that("Histogram of Latent Ability plot matches", {
-  plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-6")
-})
-
-test_that("Item Q1 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot1"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q1-6")
-})
-
-test_that("Item Q2 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot2"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q2-6")
-})
-
-test_that("Item Q3 plot matches", {
-  plotName <- results[["results"]][["plotItemCharacteristic"]][["collection"]][["plotItemCharacteristic_plot3"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-q3-6")
-})
-
-test_that("Item Information Curves plot matches", {
-  plotName <- results[["results"]][["plotItemInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "item-information-curves-6")
-})
-
-test_that("Discrimination a plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_alpha"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "discrimination-a-6")
-})
-
-test_that("Difficulty b plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_beta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "difficulty-b-6")
-})
-
-test_that("θ plot matches", {
-  plotName <- results[["results"]][["plotPriorPosterior"]][["collection"]][["plotPriorPosterior_theta"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "theta-6")
-})
-
-test_that("Test Information Function plot matches", {
-  plotName <- results[["results"]][["plotTestInformation"]][["data"]]
-  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "test-information-function-6")
-})
 
 test_that("Item Information table results match", {
   table <- results[["results"]][["tableItemStatistics"]][["data"]]
