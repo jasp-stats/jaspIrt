@@ -30,4 +30,4 @@ Imports:
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs,
-  koenderks/jaspIrtStanModels
+  jasp-stats/jaspIrtStanModels
