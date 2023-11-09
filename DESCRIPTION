@@ -1,19 +1,33 @@
-Package: jaspModule
+Package: jaspIrt
 Type: Package
-Title: A module for JASP
-Version: 0.1.0
-Date: 2020-10-15
-Author: JASP Team
-Website: jasp-stats.org
-Maintainer: JASP Team <info@jasp-stats.org>
-Description: This module offers analyses.
-License: GPL (>= 2)
+Title: Item Response Theory Module
+Version: 0.18.1
+Date: 2023-10-20
+Author: Koen Derks
+Maintainer: Koen Derks <k.derks@nyenrode.nl>
+Description: A module for analyzing the results of psychological assessments using Item Response Theory (IRT).
+Webiste: www.example.com
+License: GPL (>= 3)
 Encoding: UTF-8
+Biarch: true
+SystemRequirements: GNU make
+Depends: 
+    R (>= 3.4.0)
 Imports:
-  jaspBase,
-  jaspGraphs
-Suggests:
-  testthat
+    colorspace,
+    ggplot2,
+    ggrepel,
+    jaspBase,
+    jaspGraphs,
+    jaspIrtStanModels,
+    ltm,
+    mirt,
+    moments,
+    parallel,
+    reshape2,
+    rstan (>= 2.18.1),
+    truncdist
 Remotes:
   jasp-stats/jaspBase,
-  jasp-stats/jaspGraphs
+  jasp-stats/jaspGraphs,
+  koenderks/jaspIrtStanModels
