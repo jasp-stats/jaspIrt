@@ -14,6 +14,7 @@ Description
 	website			: "https://github.com/jasp-stats/jaspIrt"
 	license			: "GPL (>= 3)"
 	hasWrappers		: false
+	preloadData		: true
 
 	GroupTitle
 	{

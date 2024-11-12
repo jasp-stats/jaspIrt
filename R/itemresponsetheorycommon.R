@@ -35,14 +35,14 @@
   return(deps)
 }
 
-.irtReadData <- function(options) {
+.irtReadData <- function(dataset, options) {
   variables <- unlist(options[["items"]])
   variables <- variables[variables != ""]
   covariates <- unlist(options[["covariates"]])
   if (length(covariates) > 0) {
     variables <- c(variables, covariates)
   }
-  dataset <- .readDataSetToEnd(columns.as.numeric = variables)
+  dataset <- jaspBase::excludeNaListwise(dataset, variables)
   .hasErrors(dataset,
     type = c("infinity", "observations"),
     all.target = c(options[["items"]], options[["covariates"]]),
@@ -467,7 +467,7 @@
 }
 
 .irtIRTItemCharCurve <- function(dataset, options, jaspResults, ready, position) {
-  if (options[["explanatoryText"]] && options[["plotItemCharacteristic"]]) {
+  if (options[["explanatoryText"]] && length(options[["plotItemCharacteristicItems"]] > 0)) {
     text <- createJaspHtml(gettext("<h3>Explanatory Text: Item Characteristic Curves</h3>An item characteristic curve (ICC) plot shows how different test questions or items perform. It is like a graph that helps us understand how easy or hard each question is and how likely people with different abilities are to answer them correctly. In the figure, you can see a line for each question, and the shape of the line tells you if the question is easy or difficult to answer fully correctly as a function of the ability of a respondent."))
     text$position <- position
     text$dependOn(options = c("explanatoryText", "plotItemCharacteristicItems"))

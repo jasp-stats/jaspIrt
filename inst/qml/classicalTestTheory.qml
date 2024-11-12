@@ -39,7 +39,7 @@ Form
 		{
 			name: 				"items"
 			title: 				qsTr("Item Scores")
-			allowedColumns: 	["nominal", "ordinal", "scale"]
+			allowedColumns: 	["scale"]
 			info:				qsTr("Select the variables representing item scores for the analysis.")
 		}
 	}
