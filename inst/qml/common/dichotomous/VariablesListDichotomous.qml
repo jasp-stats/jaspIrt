@@ -37,7 +37,7 @@ VariablesForm
 		id:					items
 		name: 				"items"
 		title: 				qsTr("Item Responses")
-		allowedColumns: 	["nominal"]
+		allowedColumns: 	["scale"]
 		info:				qsTr("Select the variables representing item responses for the analysis.")
 	}
 
@@ -46,7 +46,7 @@ VariablesForm
 		id:					covariates
 		name: 				"covariates"
 		title: 				qsTr("Person Covariates")
-		allowedColumns:		["nominal", "ordinal", "scale"]
+		allowedColumns:		["nominal", "scale"]
 		implicitHeight:		125 * preferencesModel.uiScale
 		info:				qsTr("Select the variables representing the person-level covariates for the analysis.")
 	}
