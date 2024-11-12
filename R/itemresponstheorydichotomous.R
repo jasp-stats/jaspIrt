@@ -17,7 +17,7 @@
 
 itemResponseTheoryDichotomous <- function(jaspResults, dataset, options, ...) {
   # Preliminary work
-  dataset <- .irtReadData(options)
+  dataset <- .irtReadData(dataset, options)
   ready <- .irtReady(options)
   .irtIRTErrorHandling(dataset, options)
 

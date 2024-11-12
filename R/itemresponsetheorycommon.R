@@ -35,14 +35,14 @@
   return(deps)
 }
 
-.irtReadData <- function(options) {
+.irtReadData <- function(dataset, options) {
   variables <- unlist(options[["items"]])
   variables <- variables[variables != ""]
   covariates <- unlist(options[["covariates"]])
   if (length(covariates) > 0) {
     variables <- c(variables, covariates)
   }
-  dataset <- .readDataSetToEnd(columns.as.numeric = variables)
+  dataset <- jaspBase::excludeNaListwise(dataset, variables)
   .hasErrors(dataset,
     type = c("infinity", "observations"),
     all.target = c(options[["items"]], options[["covariates"]]),

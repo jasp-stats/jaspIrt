@@ -16,7 +16,7 @@
 #
 
 classicalTestTheory <- function(jaspResults, dataset, options, ...) {
-  dataset <- .irtReadData(options)
+  dataset <- .irtReadData(dataset, options)
   ready <- .irtReady(options)
 
   # Create the summary table

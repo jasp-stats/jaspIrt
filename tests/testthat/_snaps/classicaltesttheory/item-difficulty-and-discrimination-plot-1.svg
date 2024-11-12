@@ -219,14 +219,14 @@
 <text transform='translate(701.79,519.48) rotate(-45)' text-anchor='end' style='font-size: 12.00px; font-family: sans;' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>Q15</text>
 <text transform='translate(717.55,519.48) rotate(-45)' text-anchor='end' style='font-size: 12.00px; font-family: sans;' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>Q39</text>
 <text x='379.56' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='196.53px' lengthAdjust='spacingAndGlyphs'>Item (ordered by difficulty)</text>
-<rect x='211.19' y='20.71' width='336.74' height='39.31' style='stroke-width: 0.75; stroke: none;' />
-<rect x='211.19' y='20.71' width='336.74' height='39.31' style='stroke-width: 10.67; stroke: none;' />
-<rect x='225.13' y='26.19' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='225.84' y='26.90' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #B22222;' />
-<rect x='362.04' y='26.19' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='362.75' y='26.90' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #1E90FF;' />
-<text x='261.95' y='46.21' style='font-size: 17.00px; font-family: sans;' textLength='91.63px' lengthAdjust='spacingAndGlyphs'>Difficulty (P)</text>
-<text x='398.86' y='46.21' style='font-size: 17.00px; font-family: sans;' textLength='143.59px' lengthAdjust='spacingAndGlyphs'>Discrimination (Rit)</text>
+<rect x='219.90' y='20.71' width='319.30' height='39.31' style='stroke-width: 0.75; stroke: none;' />
+<rect x='219.90' y='20.71' width='319.30' height='39.31' style='stroke-width: 10.67; stroke: none;' />
+<rect x='225.38' y='26.19' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='226.09' y='26.90' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #B22222;' />
+<rect x='356.32' y='26.19' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='357.02' y='26.90' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #1E90FF;' />
+<text x='259.21' y='46.21' style='font-size: 17.00px; font-family: sans;' textLength='91.63px' lengthAdjust='spacingAndGlyphs'>Difficulty (P)</text>
+<text x='390.14' y='46.21' style='font-size: 17.00px; font-family: sans;' textLength='143.59px' lengthAdjust='spacingAndGlyphs'>Discrimination (Rit)</text>
 <text x='379.56' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='291.01px' lengthAdjust='spacingAndGlyphs'>item-difficulty-and-discrimination-plot-1</text>
 </g>
 </svg>
