@@ -33,7 +33,7 @@ Form
 	CheckBox { name: "dichotomous"; checked: false; visible: false } // Invisible option
 	POLY.VariablesListPolytomous { id: vars }
 	POLY.IrtInputPolytomous { id: model }
-	COMMON.IrtOutput { bayesian: true; dichotomous: false }
+	COMMON.IrtOutput { bayesian: true; dichotomous: false; modeltype: model.value }
 	COMMON.ItemInfoCurves { }
 	COMMON.ItemCharCurves { dichotomous: false }
 	BAYES.AdvancedOptions { ncovs: vars.ncovs; modeltype: model.value }

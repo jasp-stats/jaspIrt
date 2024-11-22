@@ -32,8 +32,8 @@ Form
 	CheckBox { name: "bayesian"; checked: false; visible: false } // Invisible option
 	CheckBox { name: "dichotomous"; checked: true; visible: false } // Invisible option
 	DICH.VariablesListDichotomous { }
-	DICH.IrtInputDichotomous { }
-	COMMON.IrtOutput { bayesian: false; dichotomous: true }
+	DICH.IrtInputDichotomous { id: model }
+	COMMON.IrtOutput { bayesian: false; dichotomous: true; modeltype: model.value }
 	COMMON.ItemInfoCurves { }
 	COMMON.ItemCharCurves { dichotomous: true }
 	CLASSICAL.AdvancedOptions { }

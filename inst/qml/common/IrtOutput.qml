@@ -25,6 +25,7 @@ Column
 {
 	property	bool	bayesian:		false
 	property	bool	dichotomous:	true
+	property	string	modeltype:		"Rasch"
 
 	spacing:				20 * preferencesModel.uiScale
 
@@ -72,6 +73,59 @@ Column
 			text:			qsTr("Parameter estimates")
 			visible:		bayesian
 			info:			qsTr("Generate a table of all parameters that are estimated.")
+		}
+
+		CheckBox
+		{
+			name:			"tableDifAnalysis"
+			text:			qsTr("Differential Item Functioning (DIF)")
+			visible:		!bayesian && dichotomous
+			info:			qsTr("Generate a table showing the output of a likelihood-ratio test for Differential Item Functioning (DIF).")
+
+			DropDown
+			{
+				name: 					"groupingVariable"
+				label: 					qsTr("Grouping variable")
+				showVariableTypeIcon: 	true
+				addEmptyValue: 			true
+				source: 				[ { model: columnsModel, use: "type=nominal"} ]
+			}
+
+			Group
+			{
+				title:		qsTr("Parameters")
+
+				CheckBox
+				{
+					name:		"tableDifAnalysisDiscrimination"
+					text:		qsTr("Discrimination")
+					enabled:	dichotomous ? (modeltype == "2PL" || modeltype == "3PL" || modeltype == "4PL") : false // TODO
+					checked:	true
+				}
+
+				CheckBox
+				{
+					name:		"tableDifAnalysisDifficulty"
+					text:		qsTr("Difficulty")
+					checked:	true
+				}
+
+				CheckBox
+				{
+					name:		"tableDifAnalysisGuess"
+					text:		qsTr("Guessing")
+					enabled:	dichotomous ? (modeltype == "3PL" || modeltype == "4PL") : false // TODO
+					checked:	true
+				}
+
+				CheckBox
+				{
+					name:		"tableDifAnalysisSlip"
+					text:		qsTr("Slip")
+					enabled:	dichotomous ? modeltype == "4PL" : false // TODO
+					checked:	true
+				}
+			}
 		}
 	}
 

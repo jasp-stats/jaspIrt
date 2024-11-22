@@ -904,3 +904,63 @@
   result <- list(model = model, data = data, pars = pars)
   return(result)
 }
+
+.irtDifAnalysisTable <- function(dataset, options, jaspResults, ready, position) {
+  if (options[["explanatoryText"]] && options[["tableDifAnalysis"]]) {
+    text <- createJaspHtml(gettext("<h3>Explanatory Text: Differential Item Functioning (DIF)</h3> The table below presents the results of a Differential Item Functioning (DIF) analysis. A DIF-analysis is conducted to assess whether specific items perform differently across groups while controlling for overall ability or trait levels. This ensures that the items are fair and not biased toward any particular group."))
+    text$position <- position
+    text$dependOn(options = c("explanatoryText", "tableDifAnalysis"))
+    jaspResults[["tableDifAnalysisText"]] <- text
+  }
+  if (!is.null(jaspResults[["tableDifAnalysis"]]) || !options[["tableDifAnalysis"]]) {
+    return()
+  }
+  tb <- createJaspTable(title = gettext("Differential Item Functioning (DIF)"))
+  tb$position <- position + 1
+  tb$addColumnInfo(name = "item", title = gettext("Item"), type = "string")
+  tb$addColumnInfo(name = "aic", title = gettext("AIC"), type = "number")
+  tb$addColumnInfo(name = "sabic", title = gettext("SABIC"), type = "number")
+  tb$addColumnInfo(name = "hq", title = gettext("HQ"), type = "number")
+  tb$addColumnInfo(name = "bic", title = gettext("BIC"), type = "number")
+  tb$addColumnInfo(name = "x2", title = gettext("X2"), type = "number")
+  tb$addColumnInfo(name = "df", title = gettext("df"), type = "number")
+  tb$addColumnInfo(name = "p", title = gettext("p"), type = "pvalue")
+  tb$dependOn(options = c(.irtCommonDeps(type = "irt"), "tableDifAnalysis", "groupingVariable", "tableDifAnalysisDifficulty", "tableDifAnalysisDiscrimination", "tableDifAnalysisGuess", "tableDifAnalysisSlip"))
+  tb$addFootnote(gettext("For each item, the null hypothesis specifies that there is no DIF between the groups."))
+  tb$addFootnote(gettext("p-values are not adjusted for multiple comparisons."), colName = "p")
+  if (length(options[["covariates"]]) > 0) {
+    tb$addFootnote(gettext("The latent regressions present in the ungrouped model are not included in this analysis."))
+  }
+  jaspResults[["tableDifAnalysis"]] <- tb
+  if (!ready || options[["groupingVariable"]] == "") {
+    return()
+  }
+  parameters <- character()
+  if (options[["tableDifAnalysisDifficulty"]]) {
+    parameters <- c(parameters, "d")
+  }
+  if (options[["tableDifAnalysisDiscrimination"]] && options[["model"]] %in% c("2PL", "3PL", "4PL")) {
+    parameters <- c(parameters, "a1")
+  }
+  if (options[["tableDifAnalysisGuess"]] && options[["model"]] %in% c("3PL", "4PL")) {
+    parameters <- c(parameters, "d")
+  }
+  if (options[["tableDifAnalysisSlip"]] && options[["model"]] == "4PL") {
+    parameters <- c(parameters, "u")
+  }
+  if (length(parameters) == 0) {
+    tb$setError(gettext("DIf-analysis not possible: Select at least one parameter to test."))
+    return()
+  }
+  state <- .irtIRTStateBayesian(dataset, options, jaspResults)
+  fit <- mirt::multipleGroup(data = state[["items"]], model = 1, itemtype = options[["model"]], group = dataset[[options[["groupingVariable"]]]], SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
+  dif <- mirt::DIF(fit, which.par = parameters)
+  tb[["item"]] <- options[["items"]]
+  tb[["aic"]] <- dif[["AIC"]]
+  tb[["sabic"]] <- dif[["SABIC"]]
+  tb[["hq"]] <- dif[["HQ"]]
+  tb[["bic"]] <- dif[["BIC"]]
+  tb[["x2"]] <- dif[["X2"]]
+  tb[["df"]] <- dif[["df"]]
+  tb[["p"]] <- dif[["p"]]
+}
