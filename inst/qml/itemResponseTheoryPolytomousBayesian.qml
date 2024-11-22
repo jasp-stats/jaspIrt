@@ -37,5 +37,4 @@ Form
 	COMMON.ItemInfoCurves { }
 	COMMON.ItemCharCurves { dichotomous: false }
 	BAYES.AdvancedOptions { ncovs: vars.ncovs; modeltype: model.value }
-	COMMON.DownloadReport { }
 }

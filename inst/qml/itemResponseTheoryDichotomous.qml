@@ -37,5 +37,4 @@ Form
 	COMMON.ItemInfoCurves { }
 	COMMON.ItemCharCurves { dichotomous: true }
 	CLASSICAL.AdvancedOptions { }
-	COMMON.DownloadReport { }
 }

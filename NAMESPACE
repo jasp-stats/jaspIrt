@@ -1,5 +1,4 @@
 import(jaspBase)
-export(classicalTestTheory)
 export(itemResponseTheoryDichotomous)
 export(itemResponseTheoryPolytomous)
 export(itemResponseTheoryDichotomousBayesian)
