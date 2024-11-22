@@ -33,19 +33,52 @@ Section
 		AssignedVariablesList {	name: "plotItemCharacteristicItems" }
 	}
 
-	CheckBox
+	Group
 	{
-		name:		"plotItemCharacteristicGroup"
-		text:		qsTr("Group into one figure")
-		checked:	dichotomous
-		visible:	false
-		info:		qsTr("Group item characteristic curves into one figure for easy comparison and interpretation.")
-	}
+		CheckBox
+		{
+			name:				"plotItemCharacteristicGroup"
+			text:				qsTr("Group into one figure")
+			checked:			dichotomous
+			visible:			false
+			info:				qsTr("Group item characteristic curves into one figure for easy comparison and interpretation.")
+		}
 
-	CheckBox
-	{
-		name:	"plotItemCharacteristicLabels"
-		text:	qsTr("Display labels")
-		info:	qsTr("Display labels on the item characteristic curves to provide a clear representation which item belongs to which curve.")
+		CheckBox
+		{
+			name:				"plotItemCharacteristicLabels"
+			text:				qsTr("Display labels")
+			info:				qsTr("Display labels on the item characteristic curves to provide a clear representation which item belongs to which curve.")
+		}
+
+		Group
+		{
+			visible:			!dichotomous
+			title:				qsTr("X-axis range")
+			columns:			2
+			info:				qsTr("Control the limits of the x-axis in the item characteristic curve plots.")
+
+			DoubleField
+			{
+				id:				plotItemCharacteristicFromX
+				name:			"plotItemCharacteristicFromX"
+				text:			qsTr("From")
+				negativeValues:	true
+				defaultValue:	-3
+				max:			plotItemCharacteristicToX.value
+				info:			qsTr("Specify the lower limit for the x-axis in the item characteristic curve plots.")
+			}
+
+			DoubleField
+			{
+				id:				plotItemCharacteristicToX
+				name:			"plotItemCharacteristicToX"
+				text:			qsTr("to")
+				negativeValues:	true
+				defaultValue:	3
+				min:			plotItemCharacteristicFromX.value
+				info:			qsTr("Specify the upper limit for the x-axis in the item characteristic curve plots.")
+			}
+		}
 	}
 }

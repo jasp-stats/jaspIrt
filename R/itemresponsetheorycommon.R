@@ -408,8 +408,8 @@
     state <- .irtIRTState(dataset, options, jaspResults)
   }
   plotdata <- state[["plotDataTestInformation"]]
-  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-6, 6), min.n = 4)
-  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -6 & plotdata$x <= 6)), min.n = 4)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-3, 3), min.n = 4)
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -3 & plotdata$x <= 3)), min.n = 4)
   p <- ggplot2::ggplot(data = plotdata, mapping = ggplot2::aes(x = x, y = y, color = type)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(name = "\u03B8", breaks = xBreaks, limits = range(xBreaks)) +
@@ -444,8 +444,8 @@
   }
   plotdata <- state[["plotDataItemInformation"]]
   plotdata <- subset(plotdata, plotdata$item %in% match(options[["plotItemInformationItems"]], options[["items"]]))
-  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-6, 6), min.n = 4)
-  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -6 & plotdata$x <= 6)), min.n = 4)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-3, 3), min.n = 4)
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -3 & plotdata$x <= 3)), min.n = 4)
   colors <- colorspace::qualitative_hcl(length(options[["plotItemInformationItems"]]))
   p <- ggplot2::ggplot(data = plotdata, mapping = ggplot2::aes(x = x, y = y, col = factor(item))) +
     ggplot2::geom_line() +
@@ -482,7 +482,7 @@
     object <- createJaspContainer(title = gettext("Item Characteristic Curves"))
   }
   object$position <- position + 1
-  object$dependOn(options = c(.irtCommonDeps(type = "irt"), "plotItemCharacteristicItems", "plotItemCharacteristicLabels"))
+  object$dependOn(options = c(.irtCommonDeps(type = "irt"), "plotItemCharacteristicItems", "plotItemCharacteristicLabels", "plotItemCharacteristicFromX", "plotItemCharacteristicToX"))
   jaspResults[["plotItemCharacteristic"]] <- object
   if (!ready) {
     return()
@@ -492,7 +492,7 @@
   } else {
     state <- .irtIRTState(dataset, options, jaspResults)
   }
-  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-6, 6), min.n = 4)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(options[["plotItemCharacteristicFromX"]], options[["plotItemCharacteristicToX"]]), min.n = 4)
   if (options[["plotItemCharacteristicGroup"]]) {
     plotdata <- state[["plotDataItemCharacteristic"]]
     plotdata <- subset(plotdata, plotdata$item %in% match(options[["plotItemCharacteristicItems"]], options[["items"]]))
