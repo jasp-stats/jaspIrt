@@ -59,10 +59,10 @@ itemResponseTheoryDichotomous <- function(jaspResults, dataset, options, ...) {
       covariates <- NULL
     }
     fit <- mirt::mirt(data = items, model = 1, itemtype = options[["model"]], covdata = covariates, formula = ~., SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
-    if (options[["model"]] == "grsm") {
-      thetaRange <- seq(-10, 10, by = 0.1)
+    if (options[["model"]] %in% c("rsm", "grsm")) {
+      thetaRange <- seq(-6, 6, by = 0.05)
     } else {
-      thetaRange <- seq(-25, 25, by = 0.01) # Takes too long with grsm
+      thetaRange <- seq(-25, 25, by = 0.01) # Takes too long with grsm or rsm
     }
     latentScores <- as.numeric(mirt::fscores(fit))
     # Tables

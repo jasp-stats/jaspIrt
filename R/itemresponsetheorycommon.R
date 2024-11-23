@@ -923,7 +923,7 @@
   tb$addColumnInfo(name = "hq", title = gettext("HQ"), type = "number")
   tb$addColumnInfo(name = "bic", title = gettext("BIC"), type = "number")
   tb$addColumnInfo(name = "x2", title = gettext("X2"), type = "number")
-  tb$addColumnInfo(name = "df", title = gettext("df"), type = "number")
+  tb$addColumnInfo(name = "df", title = gettext("df"), type = "integer")
   tb$addColumnInfo(name = "p", title = gettext("p"), type = "pvalue")
   tb$dependOn(options = c(.irtCommonDeps(type = "irt"), "tableDifAnalysis", "groupingVariable", "tableDifAnalysisDifficulty", "tableDifAnalysisDiscrimination", "tableDifAnalysisGuess", "tableDifAnalysisSlip"))
   tb$addFootnote(gettext("For each item, the null hypothesis specifies that there is no DIF between the groups."))
@@ -935,25 +935,59 @@
   if (!ready || options[["groupingVariable"]] == "") {
     return()
   }
+  state <- .irtIRTStateBayesian(dataset, options, jaspResults)
   parameters <- character()
-  if (options[["tableDifAnalysisDifficulty"]]) {
-    parameters <- c(parameters, "d")
-  }
-  if (options[["tableDifAnalysisDiscrimination"]] && options[["model"]] %in% c("2PL", "3PL", "4PL")) {
-    parameters <- c(parameters, "a1")
-  }
-  if (options[["tableDifAnalysisGuess"]] && options[["model"]] %in% c("3PL", "4PL")) {
-    parameters <- c(parameters, "d")
-  }
-  if (options[["tableDifAnalysisSlip"]] && options[["model"]] == "4PL") {
-    parameters <- c(parameters, "u")
+  if (options[["dichotomous"]]) {
+    if (options[["tableDifAnalysisDifficulty"]]) {
+      parameters <- c(parameters, "d")
+    }
+    if (options[["tableDifAnalysisDiscrimination"]] && options[["model"]] %in% c("2PL", "3PL", "4PL")) {
+      parameters <- c(parameters, "a1")
+    }
+    if (options[["tableDifAnalysisGuess"]] && options[["model"]] %in% c("3PL", "4PL")) {
+     parameters <- c(parameters, "g")
+    }
+    if (options[["tableDifAnalysisSlip"]] && options[["model"]] == "4PL") {
+      parameters <- c(parameters, "u")
+    }
+  } else {
+    all_parameters <- colnames(state[["coefficients"]])
+    if (options[["tableDifAnalysisDifficulty"]]) {
+      if (options[["model"]] %in% c("rsm", "grsm")) {
+        parameters <- c(parameters, "c")
+      } else if (options[["model"]] == "nominal") {
+        colnames_diff <- colnames(state[["coefficients"]])[grep("c", colnames(state[["coefficients"]]))]
+        colnames_diff <- gsub("c", "", colnames_diff)
+        colnames_diff <- paste0("d", as.numeric(colnames_diff) - 1)
+        parameters <- c(parameters, colnames_diff)
+      } else {
+        colnames_diff <- colnames(state[["coefficients"]])[grep("b", colnames(state[["coefficients"]]))]
+        colnames_diff <- gsub("b", "d", colnames_diff)
+        parameters <- c(parameters, colnames_diff)
+      }
+    }
+    if (options[["tableDifAnalysisDiscrimination"]] && options[["model"]] %in% c("gpcm", "grsm", "graded", "nominal")) {
+      if (options[["model"]] == "nominal") {
+        colnames_disc <- colnames(state[["coefficients"]])[grep("a", colnames(state[["coefficients"]]))]
+        colnames_disc <- gsub("a", "", colnames_disc)
+        colnames_disc <- paste0("ak", as.numeric(colnames_disc) - 1)
+        parameters <- c(parameters, colnames_disc)
+      } else {
+        parameters <- c(parameters, "a1")
+      }
+    }
+    if (options[["tableDifAnalysisThreshold"]] && options[["model"]] %in% c("rsm", "grsm")) {
+        colnames_tresh <- colnames(state[["coefficients"]])[grep("b", colnames(state[["coefficients"]]))]
+        parameters <- c(parameters, colnames_tresh)
+    }
   }
   if (length(parameters) == 0) {
     tb$setError(gettext("DIf-analysis not possible: Select at least one parameter to test."))
     return()
   }
-  state <- .irtIRTStateBayesian(dataset, options, jaspResults)
   fit <- mirt::multipleGroup(data = state[["items"]], model = 1, itemtype = options[["model"]], group = dataset[[options[["groupingVariable"]]]], SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
+  print(unique(unlist(lapply(mirt::coef(fit)[[1]][seq_len(length(options[["items"]]))], colnames))))
+  print(parameters)
   dif <- mirt::DIF(fit, which.par = parameters)
   tb[["item"]] <- options[["items"]]
   tb[["aic"]] <- dif[["AIC"]]

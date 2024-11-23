@@ -78,8 +78,8 @@ Column
 		CheckBox
 		{
 			name:			"tableDifAnalysis"
-			text:			qsTr("Differential Item Functioning (DIF)")
-			visible:		!bayesian && dichotomous
+			text:			qsTr("Differential item functioning (DIF)")
+			visible:		!bayesian
 			info:			qsTr("Generate a table showing the output of a likelihood-ratio test for Differential Item Functioning (DIF).")
 
 			DropDown
@@ -99,7 +99,7 @@ Column
 				{
 					name:		"tableDifAnalysisDiscrimination"
 					text:		qsTr("Discrimination")
-					enabled:	dichotomous ? (modeltype == "2PL" || modeltype == "3PL" || modeltype == "4PL") : false // TODO
+					enabled:	dichotomous ? (modeltype == "2PL" || modeltype == "3PL" || modeltype == "4PL") : (modeltype == "gpcm" || modeltype == "grsm" || modeltype == "graded" || modeltype == "nominal") // TODO
 					checked:	true
 				}
 
@@ -114,7 +114,8 @@ Column
 				{
 					name:		"tableDifAnalysisGuess"
 					text:		qsTr("Guessing")
-					enabled:	dichotomous ? (modeltype == "3PL" || modeltype == "4PL") : false // TODO
+					enabled:	dichotomous ? (modeltype == "3PL" || modeltype == "4PL") : false
+					visible:	dichotomous
 					checked:	true
 				}
 
@@ -122,7 +123,17 @@ Column
 				{
 					name:		"tableDifAnalysisSlip"
 					text:		qsTr("Slip")
-					enabled:	dichotomous ? modeltype == "4PL" : false // TODO
+					enabled:	dichotomous ? modeltype == "4PL" : false
+					visible:	dichotomous
+					checked:	true
+				}
+
+				CheckBox
+				{
+					name:		"tableDifAnalysisThreshold"
+					text:		qsTr("Threshold")
+					enabled:	dichotomous ? modeltype == "4PL" : (modeltype == "rsm" || modeltype == "grsm")
+					visible:	!dichotomous
 					checked:	true
 				}
 			}
