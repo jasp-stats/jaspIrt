@@ -945,7 +945,7 @@
       parameters <- c(parameters, "a1")
     }
     if (options[["tableDifAnalysisGuess"]] && options[["model"]] %in% c("3PL", "4PL")) {
-     parameters <- c(parameters, "g")
+      parameters <- c(parameters, "g")
     }
     if (options[["tableDifAnalysisSlip"]] && options[["model"]] == "4PL") {
       parameters <- c(parameters, "u")
@@ -977,8 +977,8 @@
       }
     }
     if (options[["tableDifAnalysisThreshold"]] && options[["model"]] %in% c("rsm", "grsm")) {
-        colnames_tresh <- colnames(state[["coefficients"]])[grep("b", colnames(state[["coefficients"]]))]
-        parameters <- c(parameters, colnames_tresh)
+      colnames_tresh <- colnames(state[["coefficients"]])[grep("b", colnames(state[["coefficients"]]))]
+      parameters <- c(parameters, colnames_tresh)
     }
   }
   if (length(parameters) == 0) {
@@ -986,8 +986,6 @@
     return()
   }
   fit <- mirt::multipleGroup(data = state[["items"]], model = 1, itemtype = options[["model"]], group = dataset[[options[["groupingVariable"]]]], SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
-  print(unique(unlist(lapply(mirt::coef(fit)[[1]][seq_len(length(options[["items"]]))], colnames))))
-  print(parameters)
   dif <- mirt::DIF(fit, which.par = parameters)
   tb[["item"]] <- options[["items"]]
   tb[["aic"]] <- dif[["AIC"]]

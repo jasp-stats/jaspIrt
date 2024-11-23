@@ -23,6 +23,10 @@ options$plotPriorPosteriorLabels <- FALSE
 options$model <- "Rasch"
 options$items <- c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8")
 options$covariates <- list()
+options$tableDifAnalysis <- TRUE
+options$groupingVariable <- "Group"
+options$tableDifAnalysisDifficulty <- TRUE
+options$tableDifAnalysisDiscrimination <- TRUE
 options$seed <- 1
 options$emIterations <- 2000
 set.seed(1)
@@ -32,6 +36,29 @@ test_that("Histogram of Latent Ability plot matches", {
   plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-1")
+})
+
+test_that("Differential Item Functioning (DIF) table results match", {
+  table <- results[["results"]][["tableDifAnalysis"]][["data"]]
+  jaspTools::expect_equal_tables(
+    table,
+    list(
+      2.36460270872294, 15.5578721749152, 4, 7.70371704585432, "Q1",
+      0.228081820319848, 2.88545817693603, 5.63539729127706, 4.86885932550331,
+      18.0621287916956, 4, 10.2079736626347, "Q2", 0.536124145688505,
+      5.38971479371639, 3.13114067449669, 3.38654481985031, 16.5798142860422,
+      4, 8.72565915698169, "Q3", 0.329305781373835, 3.9074002880634,
+      4.61345518014969, 3.43133054390864, 16.624600010101, 4, 8.77044488104002,
+      "Q4", 0.334482534436956, 3.95218601212173, 4.56866945609136,
+      6.1894825737586, 19.3827520399509, 4, 11.52859691089, "Q5",
+      0.77055757227071, 6.71033804197168, 1.8105174262414, 2.97921609561308,
+      16.1724855618049, 4, 8.31833043274446, "Q6", 0.285171577467038,
+      3.50007156382617, 5.02078390438692, 6.33813168384904, 19.5314011500413,
+      4, 11.6772460209804, "Q7", 0.797632070355019, 6.85898715206213,
+      1.66186831615096, 3.93452749495327, 17.1277969611456, 4, 9.27364183208465,
+      "Q8", 0.397217620158776, 4.45538296316636, 4.06547250504673
+    )
+  )
 })
 
 test_that("Additional Fit Statistics table results match", {
@@ -175,6 +202,10 @@ options$plotPriorPosteriorLabels <- FALSE
 options$model <- "gpcm"
 options$items <- c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8")
 options$covariates <- list()
+options$tableDifAnalysis <- TRUE
+options$groupingVariable <- "Group"
+options$tableDifAnalysisDifficulty <- TRUE
+options$tableDifAnalysisDiscrimination <- TRUE
 options$seed <- 1
 options$emIterations <- 2000
 set.seed(1)
@@ -184,6 +215,29 @@ test_that("Histogram of Latent Ability plot matches", {
   plotName <- results[["results"]][["plotHistogramAbility"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "histogram-of-latent-ability-3")
+})
+
+test_that("Differential Item Functioning (DIF) table results match", {
+  table <- results[["results"]][["tableDifAnalysis"]][["data"]]
+  jaspTools::expect_equal_tables(
+    table,
+    list(
+      4.11791855251704, 20.6095053852569, 5, 10.7918114739318, "Q1",
+      0.317862560951274, 4.76898788778362, 5.88208144748296, 5.03211784075893,
+      21.5237046734983, 5, 11.7060107621733, "Q2", 0.41981247264621,
+      5.68318717602551, 4.96788215924107, 4.6755615632901, 21.1671483960299,
+      5, 11.3494544847049, "Q3", 0.377580929378155, 5.32663089855669,
+      5.3244384367099, 4.93087895859844, 21.4224657913383, 5, 11.6047718800132,
+      "Q4", 0.407502986312014, 5.58194829386503, 5.06912104140156,
+      7.66605098106947, 24.1576378138088, 5, 14.3399439024838, "Q5",
+      0.801268044957079, 8.31712031633606, 2.33394901893053, 5.09966724560581,
+      21.5912540783456, 5, 11.7735601670206, "Q6", 0.428164530745309,
+      5.7507365808724, 4.90033275439419, 3.62201270683818, 20.113599539578,
+      5, 10.295905628253, "Q7", 0.271156375659035, 4.27308204210476,
+      6.37798729316182, 5.55317376526045, 22.0447605979998, 5, 12.2270666866748,
+      "Q8", 0.487029272913327, 6.20424310052704, 4.44682623473955
+    )
+  )
 })
 
 test_that("Item Information table results match", {
