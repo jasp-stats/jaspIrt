@@ -985,10 +985,10 @@
     tb$setError(gettext("DIf-analysis not possible: Select at least one parameter to test."))
     return()
   }
-  result <- try{(
+  result <- try({
     fit <- mirt::multipleGroup(data = state[["items"]], model = 1, itemtype = options[["model"]], group = dataset[[options[["groupingVariable"]]]], SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
     dif <- mirt::DIF(fit, which.par = parameters)
-  )}
+  })
   if (jaspBase:::isTryError(result)) {
     tb$setError(jaspBase:::.extractErrorMessage(result))
     return()
