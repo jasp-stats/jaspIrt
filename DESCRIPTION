@@ -20,11 +20,8 @@ Imports:
     jaspBase,
     jaspGraphs,
     jaspIrtStanModels,
-    ltm,
     mirt,
-    moments,
     parallel,
-    reshape2,
     rstan (>= 2.18.1),
     truncdist
 Remotes:

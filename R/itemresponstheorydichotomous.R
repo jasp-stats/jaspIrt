@@ -30,17 +30,20 @@ itemResponseTheoryDichotomous <- function(jaspResults, dataset, options, ...) {
   # Create the item fit statistics table
   .irtIRTItemFitStatisticsTable(dataset, options, jaspResults, ready, position = 5)
 
+  # Create the DIF-analysis table
+  .irtDifAnalysisTable(dataset, options, jaspResults, ready, position = 7)
+
   # Create the histogram of latent ability
-  .irtIRTHistogram(dataset, options, jaspResults, ready, position = 7)
+  .irtIRTHistogram(dataset, options, jaspResults, ready, position = 9)
 
   # Create the test information function
-  .irtIRTTestInfoCurve(dataset, options, jaspResults, ready, position = 9)
+  .irtIRTTestInfoCurve(dataset, options, jaspResults, ready, position = 11)
 
   # Create the item information curves
-  .irtIRTItemInfoCurve(dataset, options, jaspResults, ready, position = 11)
+  .irtIRTItemInfoCurve(dataset, options, jaspResults, ready, position = 13)
 
   # Create the item information curves
-  .irtIRTItemCharCurve(dataset, options, jaspResults, ready, position = 13)
+  .irtIRTItemCharCurve(dataset, options, jaspResults, ready, position = 15)
 }
 
 .irtIRTState <- function(dataset, options, jaspResults) {
@@ -55,12 +58,11 @@ itemResponseTheoryDichotomous <- function(jaspResults, dataset, options, ...) {
     } else {
       covariates <- NULL
     }
-    # Model fit (DIF analysis possible using multipleGroup model)
     fit <- mirt::mirt(data = items, model = 1, itemtype = options[["model"]], covdata = covariates, formula = ~., SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
-    if (options[["model"]] == "grsm") {
-      thetaRange <- seq(-10, 10, by = 0.1)
+    if (options[["model"]] %in% c("rsm", "grsm")) {
+      thetaRange <- seq(-6, 6, by = 0.05)
     } else {
-      thetaRange <- seq(-25, 25, by = 0.01) # Takes too long with grsm
+      thetaRange <- seq(-25, 25, by = 0.01) # Takes too long with grsm or rsm
     }
     latentScores <- as.numeric(mirt::fscores(fit))
     # Tables

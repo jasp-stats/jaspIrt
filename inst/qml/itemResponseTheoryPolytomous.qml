@@ -32,10 +32,9 @@ Form
 	CheckBox { name: "bayesian"; checked: false; visible: false } // Invisible option
 	CheckBox { name: "dichotomous"; checked: false; visible: false } // Invisible option
 	POLY.VariablesListPolytomous { }
-	POLY.IrtInputPolytomous { }
-	COMMON.IrtOutput { bayesian: false; dichotomous: false }
+	POLY.IrtInputPolytomous { id: model }
+	COMMON.IrtOutput { bayesian: false; dichotomous: false; modeltype: model.value }
 	COMMON.ItemInfoCurves { }
 	COMMON.ItemCharCurves { dichotomous: false }
 	CLASSICAL.AdvancedOptions { }
-	COMMON.DownloadReport { }
 }

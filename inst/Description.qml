@@ -33,11 +33,6 @@ Description
 		title:		qsTr("Polytomous Item Response Theory")
 		func:		"itemResponseTheoryPolytomous"
 	}
-	Analysis
-	{
-		title:		qsTr("Classical Test Theory")
-		func:		"classicalTestTheory"
-	}
 
 	GroupTitle
 	{

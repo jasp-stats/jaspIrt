@@ -408,8 +408,8 @@
     state <- .irtIRTState(dataset, options, jaspResults)
   }
   plotdata <- state[["plotDataTestInformation"]]
-  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-6, 6), min.n = 4)
-  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -6 & plotdata$x <= 6)), min.n = 4)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-3, 3), min.n = 4)
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -3 & plotdata$x <= 3)), min.n = 4)
   p <- ggplot2::ggplot(data = plotdata, mapping = ggplot2::aes(x = x, y = y, color = type)) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous(name = "\u03B8", breaks = xBreaks, limits = range(xBreaks)) +
@@ -444,8 +444,8 @@
   }
   plotdata <- state[["plotDataItemInformation"]]
   plotdata <- subset(plotdata, plotdata$item %in% match(options[["plotItemInformationItems"]], options[["items"]]))
-  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-6, 6), min.n = 4)
-  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -6 & plotdata$x <= 6)), min.n = 4)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-3, 3), min.n = 4)
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, subset(plotdata$y, plotdata$x >= -3 & plotdata$x <= 3)), min.n = 4)
   colors <- colorspace::qualitative_hcl(length(options[["plotItemInformationItems"]]))
   p <- ggplot2::ggplot(data = plotdata, mapping = ggplot2::aes(x = x, y = y, col = factor(item))) +
     ggplot2::geom_line() +
@@ -482,7 +482,7 @@
     object <- createJaspContainer(title = gettext("Item Characteristic Curves"))
   }
   object$position <- position + 1
-  object$dependOn(options = c(.irtCommonDeps(type = "irt"), "plotItemCharacteristicItems", "plotItemCharacteristicLabels"))
+  object$dependOn(options = c(.irtCommonDeps(type = "irt"), "plotItemCharacteristicItems", "plotItemCharacteristicLabels", "plotItemCharacteristicFromX", "plotItemCharacteristicToX"))
   jaspResults[["plotItemCharacteristic"]] <- object
   if (!ready) {
     return()
@@ -492,7 +492,7 @@
   } else {
     state <- .irtIRTState(dataset, options, jaspResults)
   }
-  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(-6, 6), min.n = 4)
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(options[["plotItemCharacteristicFromX"]], options[["plotItemCharacteristicToX"]]), min.n = 4)
   if (options[["plotItemCharacteristicGroup"]]) {
     plotdata <- state[["plotDataItemCharacteristic"]]
     plotdata <- subset(plotdata, plotdata$item %in% match(options[["plotItemCharacteristicItems"]], options[["items"]]))
@@ -903,4 +903,102 @@
   }
   result <- list(model = model, data = data, pars = pars)
   return(result)
+}
+
+.irtDifAnalysisTable <- function(dataset, options, jaspResults, ready, position) {
+  if (options[["explanatoryText"]] && options[["tableDifAnalysis"]]) {
+    text <- createJaspHtml(gettext("<h3>Explanatory Text: Differential Item Functioning (DIF)</h3> The table below presents the results of a Differential Item Functioning (DIF) analysis. A DIF-analysis is conducted to assess whether specific items perform differently across groups while controlling for overall ability or trait levels. This ensures that the items are fair and not biased toward any particular group."))
+    text$position <- position
+    text$dependOn(options = c("explanatoryText", "tableDifAnalysis"))
+    jaspResults[["tableDifAnalysisText"]] <- text
+  }
+  if (!is.null(jaspResults[["tableDifAnalysis"]]) || !options[["tableDifAnalysis"]]) {
+    return()
+  }
+  tb <- createJaspTable(title = gettext("Differential Item Functioning (DIF)"))
+  tb$position <- position + 1
+  tb$addColumnInfo(name = "item", title = gettext("Item"), type = "string")
+  tb$addColumnInfo(name = "aic", title = gettext("AIC"), type = "number")
+  tb$addColumnInfo(name = "sabic", title = gettext("SABIC"), type = "number")
+  tb$addColumnInfo(name = "hq", title = gettext("HQ"), type = "number")
+  tb$addColumnInfo(name = "bic", title = gettext("BIC"), type = "number")
+  tb$addColumnInfo(name = "x2", title = gettext("X2"), type = "number")
+  tb$addColumnInfo(name = "df", title = gettext("df"), type = "integer")
+  tb$addColumnInfo(name = "p", title = gettext("p"), type = "pvalue")
+  tb$dependOn(options = c(.irtCommonDeps(type = "irt"), "tableDifAnalysis", "groupingVariable", "tableDifAnalysisDifficulty", "tableDifAnalysisDiscrimination", "tableDifAnalysisGuess", "tableDifAnalysisSlip"))
+  tb$addFootnote(gettext("For each item, the null hypothesis specifies that there is no DIF between the groups."))
+  tb$addFootnote(gettext("p-values are not adjusted for multiple comparisons."), colName = "p")
+  if (length(options[["covariates"]]) > 0) {
+    tb$addFootnote(gettext("The latent regressions present in the ungrouped model are not included in this analysis."))
+  }
+  jaspResults[["tableDifAnalysis"]] <- tb
+  if (!ready || options[["groupingVariable"]] == "") {
+    return()
+  }
+  state <- .irtIRTStateBayesian(dataset, options, jaspResults)
+  parameters <- character()
+  if (options[["dichotomous"]]) {
+    if (options[["tableDifAnalysisDifficulty"]]) {
+      parameters <- c(parameters, "d")
+    }
+    if (options[["tableDifAnalysisDiscrimination"]] && options[["model"]] %in% c("2PL", "3PL", "4PL")) {
+      parameters <- c(parameters, "a1")
+    }
+    if (options[["tableDifAnalysisGuess"]] && options[["model"]] %in% c("3PL", "4PL")) {
+      parameters <- c(parameters, "g")
+    }
+    if (options[["tableDifAnalysisSlip"]] && options[["model"]] == "4PL") {
+      parameters <- c(parameters, "u")
+    }
+  } else {
+    all_parameters <- colnames(state[["coefficients"]])
+    if (options[["tableDifAnalysisDifficulty"]]) {
+      if (options[["model"]] %in% c("rsm", "grsm")) {
+        parameters <- c(parameters, "c")
+      } else if (options[["model"]] == "nominal") {
+        colnames_diff <- colnames(state[["coefficients"]])[grep("c", colnames(state[["coefficients"]]))]
+        colnames_diff <- gsub("c", "", colnames_diff)
+        colnames_diff <- paste0("d", as.numeric(colnames_diff) - 1)
+        parameters <- c(parameters, colnames_diff)
+      } else {
+        colnames_diff <- colnames(state[["coefficients"]])[grep("b", colnames(state[["coefficients"]]))]
+        colnames_diff <- gsub("b", "d", colnames_diff)
+        parameters <- c(parameters, colnames_diff)
+      }
+    }
+    if (options[["tableDifAnalysisDiscrimination"]] && options[["model"]] %in% c("gpcm", "grsm", "graded", "nominal")) {
+      if (options[["model"]] == "nominal") {
+        colnames_disc <- colnames(state[["coefficients"]])[grep("a", colnames(state[["coefficients"]]))]
+        colnames_disc <- gsub("a", "", colnames_disc)
+        colnames_disc <- paste0("ak", as.numeric(colnames_disc) - 1)
+        parameters <- c(parameters, colnames_disc)
+      } else {
+        parameters <- c(parameters, "a1")
+      }
+    }
+    if (options[["tableDifAnalysisThreshold"]] && options[["model"]] %in% c("rsm", "grsm")) {
+      colnames_tresh <- colnames(state[["coefficients"]])[grep("b", colnames(state[["coefficients"]]))]
+      parameters <- c(parameters, colnames_tresh)
+    }
+  }
+  if (length(parameters) == 0) {
+    tb$setError(gettext("DIf-analysis not possible: Select at least one parameter to test."))
+    return()
+  }
+  result <- try({
+    fit <- mirt::multipleGroup(data = state[["items"]], model = 1, itemtype = options[["model"]], group = dataset[[options[["groupingVariable"]]]], SE = FALSE, verbose = FALSE, TOL = options[["emTolerance"]], technical = list(NCYCLES = options[["emIterations"]], set.seed = options[["seed"]]))
+    dif <- mirt::DIF(fit, which.par = parameters)
+  })
+  if (jaspBase:::isTryError(result)) {
+    tb$setError(jaspBase:::.extractErrorMessage(result))
+    return()
+  }
+  tb[["item"]] <- options[["items"]]
+  tb[["aic"]] <- dif[["AIC"]]
+  tb[["sabic"]] <- dif[["SABIC"]]
+  tb[["hq"]] <- dif[["HQ"]]
+  tb[["bic"]] <- dif[["BIC"]]
+  tb[["x2"]] <- dif[["X2"]]
+  tb[["df"]] <- dif[["df"]]
+  tb[["p"]] <- dif[["p"]]
 }

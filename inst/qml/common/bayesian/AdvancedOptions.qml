@@ -810,6 +810,7 @@ Section
 			min:					0.001
 			enabled:				modeltype != "Rasch" && modeltype != "rsm"
 			info:					qsTr("Specify the scaling constant for the model. Default is 1.702 (Camilli, 1994).")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 	}
 
@@ -825,6 +826,7 @@ Section
 			defaultValue:			2000
 			min:					500
 			info:					qsTr("Specify the number of samples to be collected by each chain in the MCMC process after the burn-in phase. A larger number improves the precision of parameter estimates.")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 
 		IntegerField
@@ -835,6 +837,7 @@ Section
 			min:					200
 			max:					samples.value - 300
 			info:					qsTr("Specify the number of warmup iterations in each chain of the MCMC process. These iterations are discarded to ensure that the chain reaches the target distribution.")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 
 		IntegerField
@@ -844,6 +847,7 @@ Section
 			defaultValue:			4
 			min:					1
 			info:					qsTr("Specify the number of independent MCMC chains to run in parallel. Running multiple chains helps assess convergence and improves results.")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 	}
 
@@ -855,10 +859,11 @@ Section
 		{
 			name:					"seed"
 			text:					qsTr("Seed")
-			defaultValue:			1
-			min:					1
-			max:					99999999
+			defaultValue:			Math.floor(Math.random() * 1000000) // Init with random integer in [1,...,999999]
+			min:					-999999
+			max:					999999
 			info:					qsTr("Specify the random seed for reproducibility.")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 
 		DoubleField
@@ -870,6 +875,7 @@ Section
 			max:					0.999
 			decimals:				3
 			info:					qsTr("Specify is the target average proposal acceptance probability during Stan's adaptation period.")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 
 		IntegerField
@@ -879,6 +885,7 @@ Section
 			defaultValue:			10
 			min:					5
 			info:					qsTr("Specify the max value, in exponents of 2, of what the binary tree size in the NUTS algorithm should have.")
+			fieldWidth:				60 * preferencesModel.uiScale
 		}
 	}
 }

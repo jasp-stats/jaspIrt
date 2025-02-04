@@ -27,13 +27,14 @@ Section
 
 	DoubleField
 	{
-		name:					"priorScaling"
-		text:					qsTr("Scaling constant")
-		defaultValue:			1.702
-		decimals:				3
-		min:					0.001
-		enabled:				false
-		info:					qsTr("Specify the scaling constant for the model. Default is 1.702 (Camilli, 1994).")
+		name:				"priorScaling"
+		text:				qsTr("Scaling constant")
+		defaultValue:		1.702
+		decimals:			3
+		min:				0.001
+		enabled:			false
+		info:				qsTr("Specify the scaling constant for the model. Default is 1.702 (Camilli, 1994).")
+		fieldWidth:			60 * preferencesModel.uiScale
 	}
 
 	Group
@@ -44,10 +45,11 @@ Section
 		{
 			name:			"seed"
 			text:			qsTr("Seed")
-			defaultValue:	1
-			min:			1
-			max:			99999999
+			defaultValue:	Math.floor(Math.random() * 1000000) // Init with random integer in [1,...,999999]
+			min:			-999999
+			max:			999999
 			info:			qsTr("Specify the random seed for reproducibility.")
+			fieldWidth:		60 * preferencesModel.uiScale
 		}
 
 		IntegerField
@@ -57,6 +59,7 @@ Section
 			defaultValue:	2000
 			min:			500
 			info:			qsTr("Specify the maximum number of iterations of the EM algoritm.")
+			fieldWidth:			60 * preferencesModel.uiScale
 		}
 
 		DoubleField
@@ -67,6 +70,7 @@ Section
 			decimals:		6
 			min:			0.000001
 			info:			qsTr("Specify the tolerance for the EM algoritm.")
+			fieldWidth:		60 * preferencesModel.uiScale
 		}
 	}
 }
